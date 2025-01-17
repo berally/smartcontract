@@ -1,1 +1,1 @@
-# smartcontract
+# BERALLY Smart Contract
