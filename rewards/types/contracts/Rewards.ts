@@ -45,6 +45,7 @@ export interface RewardsInterface extends Interface {
       | "rewardToken"
       | "setBEWallet"
       | "setRewardDistributor"
+      | "setRewardToken"
       | "transferOwnership"
       | "updateCycle"
       | "upgradeToAndCall"
@@ -137,6 +138,10 @@ export interface RewardsInterface extends Interface {
     values: [AddressLike]
   ): string;
   encodeFunctionData(
+    functionFragment: "setRewardToken",
+    values: [AddressLike]
+  ): string;
+  encodeFunctionData(
     functionFragment: "transferOwnership",
     values: [AddressLike]
   ): string;
@@ -209,6 +214,10 @@ export interface RewardsInterface extends Interface {
   ): Result;
   decodeFunctionResult(
     functionFragment: "setRewardDistributor",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "setRewardToken",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -496,6 +505,12 @@ export interface Rewards extends BaseContract {
     "nonpayable"
   >;
 
+  setRewardToken: TypedContractMethod<
+    [_rewardToken: AddressLike],
+    [void],
+    "nonpayable"
+  >;
+
   transferOwnership: TypedContractMethod<
     [newOwner: AddressLike],
     [void],
@@ -637,6 +652,9 @@ export interface Rewards extends BaseContract {
     [void],
     "nonpayable"
   >;
+  getFunction(
+    nameOrSignature: "setRewardToken"
+  ): TypedContractMethod<[_rewardToken: AddressLike], [void], "nonpayable">;
   getFunction(
     nameOrSignature: "transferOwnership"
   ): TypedContractMethod<[newOwner: AddressLike], [void], "nonpayable">;

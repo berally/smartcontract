@@ -2,7 +2,7 @@ import { ethers, upgrades, run, network } from "hardhat";
 
 async function main() {
   const Rewards = await ethers.getContractFactory("Rewards");
-  const proxyRewards = '0x80d914514342A45011B84CFa9528546Adb73c63a';
+  const proxyRewards = '0x8C72dd78d4Fa5AA9947fb2147C867380AB9fFe4C';
   await upgrades.forceImport(proxyRewards, Rewards)
   const reward = await upgrades.upgradeProxy(proxyRewards, Rewards, {redeployImplementation: 'always'})
   console.log(

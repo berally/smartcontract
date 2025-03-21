@@ -177,4 +177,9 @@ contract Rewards is OwnableUpgradeable, UUPSUpgradeable, EIP712Upgradeable {
         require(_rewardDistributor != address(0), "Invalid distributor address");
         rewardDistributor = _rewardDistributor;
     }
+
+    function setRewardToken(address _rewardToken) external onlyOwner {
+        require(_rewardToken != address(0), "Invalid token address");
+        rewardToken = _rewardToken;
+    }
 }
