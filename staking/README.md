@@ -1,32 +1,132 @@
-# Berally
-## Repository
-We have two contracts:
-- `Staking`: Contract allows users to stake BRLY tokens. Based on the duration and the amount of tokens staked, they will receive rewards in the form of HONEY.
-- `Rewards`: The contract allows users to receive rewards based on their XP. After each month, users can claim reward token.
+# Berally Staking Contracts
 
-## Staking's sequence of events
-A `Staking` contract allows users to stake BRLY tokens, which are locked in the contract. Users can then request to withdraw BRLY tokens, but the withdrawal will only be permitted after a specified period by calling the claimBrly function. Rewards are distributed over time, and users can claim their rewards by calling the claimRewards function.
+Smart contracts for staking BRLY tokens and earning rewards in USDC/WBERA.
 
-### 1. Stake BRLY token
-The entry point `stake` in the `Staking` contract allows users to stake BRLY tokens, and this action can be performed multiple times.
+## Contracts
 
-### 2. Request to withdraw BRLY tokens.
-The entry point `withdraw` in the `Staking` contract allows users to submit a request to withdraw BRLY tokens. However, these tokens cannot be withdrawn immediately and must wait until the release time.
+- `Staking.sol`: Initial version with USDC rewards
+- `StakingV3.sol`: Upgraded version with WBERA rewards
+- Mock tokens for testing and testnet deployment
 
-### 3. Claim BRLY token
-The entry point `claimBrly` in the `Staking` contract allows users to withdraw BRLY tokens that were previously requested, after the release time has been reached.
+## Features
 
-### 4. Distribute rewards
-The entry point `distributeRewards` in the Staking contract allocates a certain amount of HONEY as rewards for staking. The entire reward pool is distributed among all users currently staking.
+- Stake BRLY tokens
+- Earn rewards in USDC (v1) or WBERA (v3)
+- Upgradeable using UUPS proxy pattern
+- Configurable withdraw locking time
+- Reward distribution mechanism
+- Emergency withdrawal functionality
 
-### 5. Claim rewards
-The entry point claimRewards in the Staking contract allows users to withdraw their allocated HONEY rewards, which have been distributed based on the staking duration and amount
+## Development
 
-## Rewards's sequence of events
-A `Rewards` contract allows the distribution of a certain amount of BRLY as monthly rewards. Each month, the protocol's administrator will initiate a cycle with a specified reward amount. Upon reaching the release time, users can claim their corresponding reward based on their XP.
+### Prerequisites
 
-### Create a cycle
-The entry point createCycle allows the protocol's administrator to initiate a new cycle, transfer a specified amount of reward tokens into the contract, and set the release time.
+- Node.js >= 16
+- Yarn
 
-### Claim rewards
-The entry point claim allows users to withdraw their corresponding reward based on the XP they accumulated during the cycle, once the release time has been reached.
+### Installation
+
+```bash
+yarn install
+```
+
+### Compile Contracts
+
+```bash
+yarn compile
+```
+
+### Run Tests
+
+```bash
+# Run all tests
+yarn test
+
+# Run coverage
+yarn test:coverage
+```
+
+### Local Development
+
+```bash
+# Start local node
+yarn start
+
+# Deploy to local network
+yarn hardhat run scripts/deploy-staking.ts --network localhost
+```
+
+## Deployment
+
+### Testnet
+
+1. Set up environment variables:
+```bash
+cp .env.example .env
+# Edit .env with your private key and API keys
+```
+
+2. Deploy mock tokens:
+```bash
+yarn deploy:MockTokens:testnet
+```
+
+3. Deploy staking contract:
+```bash
+yarn deploy:Staking:berachainTestnet
+```
+
+4. Verify contracts:
+```bash
+yarn verify
+```
+
+### Mainnet
+
+1. Update mainnet token addresses in deployment scripts
+
+2. Deploy staking contract:
+```bash
+yarn deploy:StakingV3:berachainMainnet
+```
+
+### Check Deployment Status
+
+```bash
+yarn check:status
+```
+
+## Upgrading
+
+1. Deploy new implementation:
+```bash
+yarn upgrade:Staking:berachainTestnet
+```
+
+2. Verify new implementation:
+```bash
+yarn verify <IMPLEMENTATION_ADDRESS>
+```
+
+## Contract Addresses
+
+### Testnet
+- BRLY: [Explorer Link]
+- USDC/WBERA: [Explorer Link]
+- Staking Proxy: [Explorer Link]
+
+### Mainnet
+- BRLY: [Explorer Link]
+- WBERA: [Explorer Link]
+- Staking Proxy: [Explorer Link]
+
+## Security
+
+- All contracts are upgradeable
+- Emergency functions for critical situations
+- Comprehensive test coverage
+- Access control using OpenZeppelin
+
+## License
+
+MIT

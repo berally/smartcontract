@@ -1,7 +1,7 @@
 import { HardhatUserConfig } from "hardhat/config";
 import "@nomicfoundation/hardhat-toolbox";
-import "hardhat-abi-exporter";
 import "@openzeppelin/hardhat-upgrades";
+import "hardhat-abi-exporter";
 import dotenv from "dotenv";
 dotenv.config();
 
@@ -19,6 +19,17 @@ const config: HardhatUserConfig = {
         ?[
           process.env.OWNER_PRIVATE_KEY,
         ]:[],
+    },
+    berachainMainnet : {
+      url: 'https://rpc.berachain.com/',
+      chainId: 80094,
+      accounts: process.env.OWNER_PRIVATE_KEY
+          ?[
+            process.env.OWNER_PRIVATE_KEY,
+          ]:[],
+    },
+    hardhat: {
+      allowUnlimitedContractSize: true
     }
   },
   etherscan: {
@@ -34,21 +45,26 @@ const config: HardhatUserConfig = {
           browserURL: "https://bartio.beratrail.io/"
         }
       },
+      {
+        network: "berachainMainnet",
+        chainId: 80094,
+        urls: {
+          apiURL: 'https://api.routescan.io/v2/network/mainnet/evm/80094/etherscan',
+          // apiURL: 'https://api.berascan.com/api',
+          browserURL: "https://berascan.com/"
+        }
+      },
     ]
   },
   solidity: {
-    compilers: [
-      {
-        version: "0.8.24",
-        settings: {
-          viaIR: true,
-          optimizer: {
-            enabled: true,
-            runs: 20,
-          },
-        },
-      }
-    ]
+    version: "0.8.20",
+    settings: {
+      optimizer: {
+        enabled: true,
+        runs: 200
+      },
+      viaIR: true
+    }
   },
   typechain: {
     outDir: "./types",
