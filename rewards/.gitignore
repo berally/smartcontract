@@ -1,0 +1,72 @@
+# Hardhat files
+cache
+artifacts
+typechain
+typechain-types
+coverage
+coverage.json
+
+# OpenZeppelin
+.openzeppelin/unknown-*.json
+
+# Compiler files
+cache/
+out/
+
+# Ignores development broadcast logs
+!/broadcast
+/broadcast/*/31337/
+/broadcast/**/dry-run/
+
+# Docs
+docs/
+
+# Dotenv file
+.env
+
+# Dependencies
+node_modules
+package-lock.json
+yarn.lock
+yarn-error.log
+
+# IDE
+.vscode
+.idea
+*.iml
+*.iws
+.DS_Store
+
+# Build
+dist/
+build/
+abi/
+
+# Debug
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Local env files
+.env*.local
+
+# Testing
+coverage/
+coverage.json
+test-results/
+playwright-report/
+
+# Hardhat Plugin files
+typechain-types/
+artifacts/
+cache/
+
+# Gas reporter results
+gas-report.txt
+
+# Deployment
+deployments/hardhat/
+deployments/localhost/
+
+# Tenderly
+tenderly.yaml 
