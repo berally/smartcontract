@@ -4,10 +4,16 @@ coverage
 coverage.json
 typechain
 typechain-types
-.openzeppelin
-.idea
+.DS_Store
+
 # Hardhat files
 cache
 artifacts
-abi
-types
+deployments
+
+# IDE
+.vscode
+.idea
+
+# Build
+dist/

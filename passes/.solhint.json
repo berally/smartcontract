@@ -1,0 +1,12 @@
+{
+  "extends": "solhint:recommended",
+  "rules": {
+    "compiler-version": ["error", "^0.8.0"],
+    "func-visibility": ["warn", { "ignoreConstructors": true }],
+    "not-rely-on-time": "off",
+    "no-empty-blocks": "off",
+    "no-global-import": "off",
+    "private-vars-leading-underscore": "off",
+    "reason-string": "off"
+  }
+} 

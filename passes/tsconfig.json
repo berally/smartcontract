@@ -1,14 +1,17 @@
 {
   "compilerOptions": {
-    "target": "es2022",
-    "module": "node16",
-    "esModuleInterop": true,
-    "forceConsistentCasingInFileNames": true,
+    "target": "es2020",
+    "module": "commonjs",
     "strict": true,
-    "skipLibCheck": true,
-    "resolveJsonModule": true
+    "esModuleInterop": true,
+    "outDir": "dist",
+    "resolveJsonModule": true,
+    "declaration": true,
+    "declarationMap": true,
+    "sourceMap": true,
+    "typeRoots": ["./node_modules/@types"],
+    "types": ["node", "mocha", "chai"]
   },
-  "ts-node": {
-    "experimentalResolver": true
-  }
+  "include": ["./test", "./scripts"],
+  "files": ["./hardhat.config.ts"]
 }
